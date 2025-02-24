@@ -1,0 +1,20 @@
+name: Discord Webhook Notification
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want updates from
+  pull_request:
+    types: [opened, closed, merged]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Message to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"username": "GitHub Bot", "content": "**New GitHub Event!**\nRepository: ${{ github.repository }}\nEvent: ${{ github.event_name }}\nCommit Message: ${{ github.event.head_commit.message }}"}' \
+          "$DISCORD_WEBHOOK"
+          
