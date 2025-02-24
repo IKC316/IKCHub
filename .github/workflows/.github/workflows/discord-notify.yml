@@ -17,3 +17,4 @@ jobs:
           curl -X POST -H "Content-Type: application/json" \
           -d '{"username": "GitHub Bot", "content": "**New GitHub Event!**\nRepository: ${{ github.repository }}\nEvent: ${{ github.event_name }}\nCommit Message: ${{ github.event.head_commit.message }}"}' \
           "$DISCORD_WEBHOOK"
+
